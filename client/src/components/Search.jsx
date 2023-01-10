@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Search = () => {
+const Search = ({ search }) => {
   const [query, setQuery] = useState('');
 
   const handleChange = (e) => {
@@ -8,13 +8,19 @@ const Search = () => {
   };
 
   const handleClick = () => {
-    console.log(query);
+    search(query);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      search(query);
+    }
   };
 
   return (
-    <div>
-      <input onChange={handleChange} />
-      <button type="submit" onClick={handleClick}>Search</button>
+    <div style={{ width: '65vw' }}>
+      <input onChange={handleChange} onKeyPress={handleKeyPress} style={{ width: '55vw' }} />
+      <button type="submit" onClick={handleClick} style={{ width: '9vw' }}>Search</button>
     </div>
   );
 };

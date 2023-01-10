@@ -11,6 +11,9 @@ const clientIndexHtml = path.join(clientDirPath, 'index.html');
 
 app.use(express.static(clientDirPath));
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use('/', router);
 
 app.get('/*', (req, res) => {

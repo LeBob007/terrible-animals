@@ -6,23 +6,32 @@
 
 .link-outer-container {
   display: flex;
-  width: 58.75%;
+  width: 100%;
   align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: center;
   background-color: rgb(85, 85, 85);
-  border: 2px solid cyan;
+  /* border: 2px solid cyan; */
 }
 
 .link-inner-container {
   display: flex;
   width: fit-content;
   background-color: rgb(85, 85, 85);
-  border: 2px solid red;
+  /* border: 2px solid red; */
 }
 
 .nav-li {
   color: white;
   text-align: center;
   padding: 14px 16px;
+  text-decoration: none;
+}
+
+.link-text {
+  font-family: 'Work Sans', sans-serif;
+  text-transform: uppercase;
+  color:rgb(180, 243, 243);
+  font-size: 16px;
+  font-weight: 300;
   text-decoration: none;
 }

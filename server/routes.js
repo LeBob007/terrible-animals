@@ -9,4 +9,13 @@ router.get('/animals', (req, res) => {
   });
 });
 
+router.post('/animals', (req, res) => {
+  console.log(req.body);
+  Animal.create(req.body).then(() => {
+    res.status(201).send();
+  }).catch((err) => {
+    res.status(500).send(err);
+  });
+});
+
 module.exports = router;
