@@ -1,3 +1,5 @@
+require('dotenv').config();
+const axios = require('axios');
 const router = require('express').Router();
 const Animal = require('./db');
 
@@ -10,11 +12,22 @@ router.get('/animals', (req, res) => {
 });
 
 router.post('/animals', (req, res) => {
-  console.log(req.body);
-  Animal.create(req.body).then(() => {
-    res.status(201).send();
+  const params = {
+    client_id: process.env.CLIENTID,
+    query: req.body.animal,
+  };
+  axios.get('https://api.unsplash.com/search/photos', { params }).then((data) => {
+    const newAnimal = {
+      name: req.body.animal,
+      photo: data.data.results[0].urls.raw.split('?')[0],
+    };
+    Animal.create(newAnimal).then(() => {
+      res.status(201).send();
+    }).catch((err) => {
+      res.status(500).send(err);
+    });
   }).catch((err) => {
-    res.status(500).send(err);
+    console.log(err);
   });
 });
 

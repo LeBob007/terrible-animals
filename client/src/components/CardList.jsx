@@ -1,14 +1,30 @@
-import React from 'react';
+/* eslint-disable no-nested-ternary */
+import React, { useState, useEffect } from 'react';
 import ImageList from '@mui/material/ImageList';
 
 import Card from './Card';
 
 const CardList = ({ animals }) => {
+  const [column, setColumn] = useState(4);
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      const columns = window.innerWidth > 2000
+        ? 4
+        : window.innerWidth > 1500
+          ? 3
+          : window.innerWidth > 1000
+            ? 2
+            : 1;
+      setColumn(columns);
+    });
+  });
+
   return (
-    <div style={{ display: 'flex' }}>
-      <ImageList sx={{ width: '65vw', height: '80vh' }}>
+    <div>
+      <ImageList sx={{ width: '65vw', height: '80vh' }} cols={column}>
         {animals.map((animal) => (
-          <Card animal={animal} />
+          <Card key={animal._id} animal={animal} />
         ))}
       </ImageList>
     </div>

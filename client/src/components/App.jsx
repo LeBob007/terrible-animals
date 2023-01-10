@@ -15,7 +15,7 @@ const App = () => {
     }).catch((err) => {
       console.log(err);
     });
-  }
+  };
 
   const search = (query) => {
     const filter = animals.filter((animal) => (
@@ -29,14 +29,19 @@ const App = () => {
   }, []);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
-      <div style={{ padding: 10 }}>
-        <Search search={search} />
+    <div>
+      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <div style={{ padding: 10 }}>
+          <Search search={search} />
+        </div>
+        <div>
+          {filteredAnimals.length === 0
+            ? null
+            : <CardList animals={filteredAnimals} />}
+        </div>
       </div>
-      <div>
-        {filteredAnimals.length === 0
-          ? <AddAnimal />
-          : <CardList animals={filteredAnimals} />}
+      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <AddAnimal getAnimals={getAnimals} />
       </div>
     </div>
   );
