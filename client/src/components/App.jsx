@@ -35,13 +35,11 @@ const App = () => {
           <Search search={search} />
         </div>
         <div>
-          {filteredAnimals.length === 0
-            ? null
-            : <CardList animals={filteredAnimals} />}
+          {filteredAnimals.length > 0 && <CardList animals={filteredAnimals} />}
         </div>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
-        <AddAnimal getAnimals={getAnimals} />
+        {filteredAnimals.length === 0 && <AddAnimal getAnimals={getAnimals} />}
       </div>
     </div>
   );

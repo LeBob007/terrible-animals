@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ImageList from '@mui/material/ImageList';
 
 import Card from './Card';
+import '../assets/styles.css';
 
 const CardList = ({ animals }) => {
   const [column, setColumn] = useState(4);
@@ -22,7 +23,7 @@ const CardList = ({ animals }) => {
 
   return (
     <div>
-      <ImageList sx={{ width: '65vw', height: '80vh' }} cols={column}>
+      <ImageList className="animal-image-list" sx={{ width: '65vw', height: '80vh' }} cols={column}>
         {animals.map((animal) => (
           <Card key={animal._id} animal={animal} />
         ))}
