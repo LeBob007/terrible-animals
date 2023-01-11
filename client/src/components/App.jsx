@@ -3,6 +3,7 @@ import axios from 'axios';
 import CardList from './CardList';
 import Search from './Search';
 import AddAnimal from './AddAnimal';
+import '../assets/styles.css';
 
 const App = () => {
   const [animals, setAnimals] = useState([]);
@@ -30,7 +31,7 @@ const App = () => {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+      <div className="center-container">
         <div style={{ padding: 10 }}>
           <Search search={search} />
         </div>
@@ -38,7 +39,7 @@ const App = () => {
           {filteredAnimals.length > 0 && <CardList animals={filteredAnimals} />}
         </div>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+      <div className="center-container">
         {filteredAnimals.length === 0 && <AddAnimal getAnimals={getAnimals} />}
       </div>
     </div>

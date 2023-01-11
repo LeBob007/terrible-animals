@@ -11,14 +11,20 @@ const animalSchema = new mongoose.Schema({
     {
       fact: String,
       author: String,
-      likes: Number,
+      likes: {
+        type: Number,
+        default: 0,
+      },
     },
   ],
   funFacts: [
     {
       fact: String,
       author: String,
-      likes: Number,
+      likes: {
+        type: Number,
+        default: 0,
+      },
     },
   ],
 });

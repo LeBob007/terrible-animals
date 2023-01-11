@@ -7,7 +7,7 @@ const Card = ({ animal }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/${animal.name}`);
+    navigate(`/${animal.name}`, { state: animal });
   };
 
   const properName = animal.name.split(' ').map((word) => word[0].toUpperCase() + word.slice(1)).join(' ');
