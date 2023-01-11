@@ -1,18 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import '../assets/styles.css';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
+
+import TerribleFacts from '../components/Facts/TerribleFacts';
+import FunFacts from '../components/Facts/FunFacts';
 
 const Animal = () => {
   const animal = useLocation();
   const properName = animal.state.name.split(' ').map((word) => word[0].toUpperCase() + word.slice(1)).join(' ');
 
-  const [value, setValue] = React.useState('one');
+  const [value, setValue] = useState('one');
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const [render, setRender] = useState(false);
+
+  const addNewFact = (newFact) => {
+    const fact = newFact;
+    fact.name = animal.state.name;
+    axios.patch('/animals', fact).then(() => {
+      axios.get('/animal', { params: { name: animal.state.name } }).then((data) => {
+        // eslint-disable-next-line prefer-destructuring
+        animal.state = data.data[0];
+        setRender(!render);
+      }).catch((err) => {
+        console.log(err);
+      });
+    }).catch((err) => {
+      console.log(err);
+    });
   };
 
   return (
@@ -43,6 +64,23 @@ const Animal = () => {
           <Tab value="two" label="Fun Facts" style={{ minWidth: '25%', color: 'green' }} />
         </Tabs>
       </Box>
+      <div className="center-container">
+        {value === 'one'
+          ? (
+            <TerribleFacts
+              facts={animal.state.terribleFacts}
+              name={animal.state.name}
+              add={addNewFact}
+            />
+          )
+          : (
+            <FunFacts
+              facts={animal.state.funFacts}
+              name={animal.state.name}
+              add={addNewFact}
+            />
+          )}
+      </div>
     </div>
   );
 };

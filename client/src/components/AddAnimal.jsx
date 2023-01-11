@@ -50,7 +50,7 @@ const AddAnimal = ({ getAnimals }) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Add a New Animal</Button>
+      <Button onClick={handleOpen} color="success">Add a New Animal</Button>
       <Modal
         open={open}
         onClose={handleClose}

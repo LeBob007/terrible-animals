@@ -40,16 +40,19 @@ router.post('/animals', (req, res) => {
 });
 
 router.patch('/animals', (req, res) => {
+  console.log(req.body);
   const fact = { fact: req.body.fact, author: req.body.author };
   Animal.find({ name: req.body.name }).then((data) => {
-    if (req.body.type === 'terrible') {
+    if (req.body.type === 'Terrible') {
+      console.log('adding terrible fact');
       data[0].terribleFacts.push(fact);
       data[0].save().then(() => {
         res.status(204).send();
       }).catch((err) => {
         res.status(500).send(err);
       });
-    } else {
+    } else if (req.body.type === 'Fun') {
+      console.log('adding fun fact');
       data[0].funFacts.push(fact);
       data[0].save().then(() => {
         res.status(204).send();
