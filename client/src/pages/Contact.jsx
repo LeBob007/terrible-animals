@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 import Person2RoundedIcon from '@mui/icons-material/Person2Rounded';
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
@@ -15,12 +16,25 @@ const Contact = () => {
   const [message, setMessage] = useState('');
   const [open, setOpen] = useState(false);
 
-  const clearForm = () => {
+  const sendQuestion = () => {
+    const data = {
+      service_id: process.env.SERVICE_ID,
+      template_id: process.env.TEMPLATE_ID,
+      user_id: process.env.PUBLIC_KEY,
+      template_params: {
+        from_name: name,
+        from_email: email,
+        from_phone: phone,
+        message,
+      },
+    };
     setName('');
     setEmail('');
     setPhone('');
     setMessage('');
     setOpen(true);
+    axios.post('https://api.emailjs.com/api/v1.0/email/send', data)
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -94,7 +108,7 @@ const Contact = () => {
               multiline
               minRows="5"
             />
-            <Button fullWidth color="success" variant="contained" onClick={clearForm}>Send</Button>
+            <Button fullWidth color="success" variant="contained" onClick={sendQuestion}>Send</Button>
             <Collapse in={open}>
               <Alert onClose={() => setOpen(false)}>Message sent!</Alert>
             </Collapse>
