@@ -3,11 +3,13 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import { useNavigate } from 'react-router-dom';
 
-const Card = ({ animal }) => {
+const Card = ({ animal, user }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/${animal.name}`, { state: animal });
+    const details = animal;
+    details.username = user.username;
+    navigate(`/${animal.name}`, { state: details });
   };
 
   const properName = animal.name.split(' ').map((word) => word[0].toUpperCase() + word.slice(1)).join(' ');

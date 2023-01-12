@@ -5,7 +5,7 @@ import ImageList from '@mui/material/ImageList';
 import Card from './Card';
 import '../assets/styles.css';
 
-const CardList = ({ animals }) => {
+const CardList = ({ animals, user }) => {
   const [column, setColumn] = useState(4);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const CardList = ({ animals }) => {
     <div>
       <ImageList className="animal-image-list" sx={{ width: '65vw', height: '80vh' }} cols={column}>
         {animals.map((animal) => (
-          <Card key={animal._id} animal={animal} />
+          <Card key={animal._id} animal={animal} user={user} />
         ))}
       </ImageList>
     </div>

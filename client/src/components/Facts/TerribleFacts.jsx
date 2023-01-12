@@ -9,15 +9,15 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Fact from './Fact';
 
 const TerribleFacts = ({
-  facts, add, remove,
+  facts, add, remove, user,
 }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [newFact, setNewFact] = useState({ type: 'Terrible' });
+  const [newFact, setNewFact] = useState({ type: 'Terrible', author: user });
   const handleFactChange = (e) => setNewFact({ ...newFact, fact: e.target.value });
-  const handleAuthorChange = (e) => setNewFact({ ...newFact, author: e.target.value });
+  // const handleAuthorChange = (e) => setNewFact({ ...newFact, author: e.target.value });
 
   const handleSubmit = () => {
     add(newFact);
@@ -47,7 +47,7 @@ const TerribleFacts = ({
               variant="standard"
               required
             />
-            <TextField
+            {/* <TextField
               margin="dense"
               id="author"
               label="Author"
@@ -57,7 +57,7 @@ const TerribleFacts = ({
               fullWidth
               variant="standard"
               required
-            />
+            /> */}
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="success">Cancel</Button>

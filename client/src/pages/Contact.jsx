@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Person2RoundedIcon from '@mui/icons-material/Person2Rounded';
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 import LocalPhoneRoundedIcon from '@mui/icons-material/LocalPhoneRounded';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
 
 const Contact = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [message, setMessage] = useState('');
+  const [open, setOpen] = useState(false);
+
+  const clearForm = () => {
+    setName('');
+    setEmail('');
+    setPhone('');
+    setMessage('');
+    setOpen(true);
+  };
+
   return (
     <div className="center-container">
       <div style={{ width: '50vw' }}>
@@ -37,6 +53,8 @@ const Contact = () => {
               id="name"
               label="Name"
               autoComplete="off"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
               color="success"
               fullWidth
               variant="standard"
@@ -46,6 +64,8 @@ const Contact = () => {
               id="email"
               label="Email"
               autoComplete="off"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
               color="success"
               fullWidth
               variant="standard"
@@ -55,6 +75,8 @@ const Contact = () => {
               id="phone"
               label="Phone"
               autoComplete="off"
+              onChange={(e) => setPhone(e.target.value)}
+              value={phone}
               color="success"
               fullWidth
               variant="standard"
@@ -64,13 +86,18 @@ const Contact = () => {
               id="message"
               label="Message"
               autoComplete="off"
+              onChange={(e) => setMessage(e.target.value)}
+              value={message}
               color="success"
               fullWidth
               variant="standard"
               multiline
               minRows="5"
             />
-            <Button fullWidth color="success" variant="contained">Send</Button>
+            <Button fullWidth color="success" variant="contained" onClick={clearForm}>Send</Button>
+            <Collapse in={open}>
+              <Alert onClose={() => setOpen(false)}>Message sent!</Alert>
+            </Collapse>
           </div>
         </div>
       </div>

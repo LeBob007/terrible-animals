@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 import CardList from './CardList';
 import Search from './Search';
 import AddAnimal from './AddAnimal';
 import '../assets/styles.css';
 
 const App = () => {
+  const user = useLocation();
   const [animals, setAnimals] = useState([]);
   const [filteredAnimals, setFilteredAnimals] = useState([]);
 
@@ -36,7 +38,7 @@ const App = () => {
           <Search search={search} />
         </div>
         <div>
-          {filteredAnimals.length > 0 && <CardList animals={filteredAnimals} />}
+          {filteredAnimals.length > 0 && <CardList animals={filteredAnimals} user={user.state} />}
         </div>
       </div>
       <div className="center-container">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import IconButton from '@mui/material/IconButton';
@@ -8,6 +8,8 @@ import TextField from '@mui/material/TextField';
 const Contact = () => {
   const navigate = useNavigate();
 
+  const [username, setUsername] = useState('Guest');
+
   return (
     <div className="center-container">
       <div style={{ width: '30vw', paddingLeft: '3vw' }}>
@@ -16,6 +18,7 @@ const Contact = () => {
           id="username"
           className="text"
           label="Username"
+          onChange={(e) => setUsername(e.target.value)}
           color="success"
           variant="outlined"
           size="small"
@@ -31,7 +34,7 @@ const Contact = () => {
           size="small"
           sx={{ width: '25vw' }}
         />
-        <IconButton type="submit" aria-label="search" onClick={() => navigate('/home')}>
+        <IconButton type="submit" aria-label="search" onClick={() => navigate('/home', { state: { username } })}>
           <ArrowForwardIosRoundedIcon style={{ fill: 'green' }} />
         </IconButton>
       </div>

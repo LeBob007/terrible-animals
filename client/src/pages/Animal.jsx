@@ -85,6 +85,7 @@ const Animal = () => {
               facts={animal.state.terribleFacts}
               add={addNewFact}
               remove={deleteFact}
+              user={animal.state.username}
             />
           )
           : (
@@ -92,6 +93,7 @@ const Animal = () => {
               facts={animal.state.funFacts}
               add={addNewFact}
               remove={deleteFact}
+              user={animal.state.username}
             />
           )}
       </div>
