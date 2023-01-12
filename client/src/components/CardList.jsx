@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react';
 import ImageList from '@mui/material/ImageList';

@@ -36,6 +36,20 @@ const Animal = () => {
     });
   };
 
+  const deleteFact = (fact) => {
+    axios.delete(`/animals/${fact._id}`, { data: { name: animal.state.name, type: fact.type } }).then(() => {
+      axios.get('/animal', { params: { name: animal.state.name } }).then((data) => {
+        // eslint-disable-next-line prefer-destructuring
+        animal.state = data.data[0];
+        setRender(!render);
+      }).catch((err) => {
+        console.log(err);
+      });
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
+
   return (
     <div>
       <div className="center-container">
@@ -69,15 +83,15 @@ const Animal = () => {
           ? (
             <TerribleFacts
               facts={animal.state.terribleFacts}
-              name={animal.state.name}
               add={addNewFact}
+              remove={deleteFact}
             />
           )
           : (
             <FunFacts
               facts={animal.state.funFacts}
-              name={animal.state.name}
               add={addNewFact}
+              remove={deleteFact}
             />
           )}
       </div>

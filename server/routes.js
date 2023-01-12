@@ -65,4 +65,22 @@ router.patch('/animals', (req, res) => {
   });
 });
 
+router.delete('/animals/:_id', (req, res) => {
+  if (req.body.type === 'Terrible') {
+    Animal.updateOne({ name: req.body.name }, { $pull: { terribleFacts: { _id: req.params._id } } })
+      .then(() => {
+        res.status(204).send();
+      }).catch((err) => {
+        res.status(500).send(err);
+      });
+  } else if (req.body.type === 'Fun') {
+    Animal.updateOne({ name: req.body.name }, { $pull: { funFacts: { _id: req.params._id } } })
+      .then(() => {
+        res.status(204).send();
+      }).catch((err) => {
+        res.status(500).send(err);
+      });
+  }
+});
+
 module.exports = router;

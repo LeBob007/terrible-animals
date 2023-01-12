@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -9,14 +8,16 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Fact from './Fact';
 
-const TerribleFacts = ({ facts, add }) => {
+const TerribleFacts = ({
+  facts, add, remove,
+}) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const [newFact, setNewFact] = useState({ type: 'Terrible' });
   const handleFactChange = (e) => setNewFact({ ...newFact, fact: e.target.value });
-  const handleNameChange = (e) => setNewFact({ ...newFact, author: e.target.value });
+  const handleAuthorChange = (e) => setNewFact({ ...newFact, author: e.target.value });
 
   const handleSubmit = () => {
     add(newFact);
@@ -25,7 +26,7 @@ const TerribleFacts = ({ facts, add }) => {
 
   return (
     <div className="center-container">
-      {facts.map((fact) => <Fact key={fact._id} fact={fact} />)}
+      {facts.map((fact) => <Fact type="Terrible" key={fact._id} fact={fact} remove={remove} />)}
       <div className="add-fact-body">
         <Button variant="contained" onClick={handleOpen} color="success">Add a Fact</Button>
         <Dialog open={open} onClose={handleClose}>
@@ -37,21 +38,25 @@ const TerribleFacts = ({ facts, add }) => {
             <TextField
               autoFocus
               margin="dense"
-              id="name"
+              id="fact"
               label="Fact"
+              autoComplete="off"
               onChange={handleFactChange}
               color="success"
               fullWidth
               variant="standard"
+              required
             />
             <TextField
               margin="dense"
-              id="name"
-              label="Name"
-              onChange={handleNameChange}
+              id="author"
+              label="Author"
+              autoComplete="off"
+              onChange={handleAuthorChange}
               color="success"
               fullWidth
               variant="standard"
+              required
             />
           </DialogContent>
           <DialogActions>

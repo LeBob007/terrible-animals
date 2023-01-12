@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -8,16 +7,24 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+import IconButton from '@mui/material/IconButton';
 import ShareRoundedIcon from '@mui/icons-material/ShareRounded';
 import FlagRoundedIcon from '@mui/icons-material/FlagRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 
-const Fact = ({ fact }) => {
+const Fact = ({ type, fact, remove }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const [flag, setFlag] = useState(false);
+  const handleFavorite = () => {
+    setFlag(true);
+  };
+
   const deleteFact = () => {
+    const factToRemove = { _id: fact._id, type };
+    remove(factToRemove);
     setOpen(false);
   };
 
@@ -30,9 +37,15 @@ const Fact = ({ fact }) => {
         {fact.author}
       </div>
       <div className="fact-body-buttons">
-        <FavoriteRoundedIcon color="success" />
-        <ShareRoundedIcon color="success" />
-        <FlagRoundedIcon onClick={handleOpen} color="success" />
+        <IconButton aria-label="favorite" onClick={handleFavorite}>
+          <FavoriteRoundedIcon color={flag ? 'secondary' : 'success'} />
+        </IconButton>
+        <IconButton aria-label="share">
+          <ShareRoundedIcon color="success" />
+        </IconButton>
+        <IconButton aria-label="report" onClick={handleOpen}>
+          <FlagRoundedIcon color="success" />
+        </IconButton>
       </div>
       <Dialog
         open={open}
@@ -49,8 +62,8 @@ const Fact = ({ fact }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="success">Cancel</Button>
-          <Button onClick={deleteFact} color="success">Agree</Button>
+          <Button onClick={handleClose} color="success">No</Button>
+          <Button onClick={deleteFact} color="success">Yes</Button>
         </DialogActions>
       </Dialog>
     </div>

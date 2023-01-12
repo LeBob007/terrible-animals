@@ -1,21 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const AddAnimal = ({ getAnimals }) => {
   const [open, setOpen] = useState(false);
@@ -31,42 +22,39 @@ const AddAnimal = ({ getAnimals }) => {
   const handleClick = () => {
     handleClose();
     axios.post('/animals', { animal }).then(() => {
+      setOpen(false);
       getAnimals();
     }).catch((err) => {
       console.log(err);
     });
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleClose();
-      axios.post('/animals', { animal }).then(() => {
-        getAnimals();
-      }).catch((err) => {
-        console.log(err);
-      });
-    }
-  };
-
   return (
     <div>
       <Button onClick={handleOpen} color="success">Add a New Animal</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="new-animal-modal"
-        aria-describedby="add-a-new-animal"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Add a New Animal!
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <input onChange={handleChange} onKeyPress={handleKeyPress} />
-            <button type="submit" onClick={handleClick}>Add</button>
-          </Typography>
-        </Box>
-      </Modal>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle sx={{ color: '#1b5e20' }}>Add A Fun Fact!</DialogTitle>
+        <DialogContent>
+          <DialogContentText sx={{ color: '#1b5e20' }}>
+            Have something to share? Add it down below!
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="animal"
+            label="Animal"
+            autoComplete="off"
+            onChange={handleChange}
+            color="success"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="success">Cancel</Button>
+          <Button onClick={handleClick} color="success">Add</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

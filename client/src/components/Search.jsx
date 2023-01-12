@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import IconButton from '@mui/material/IconButton';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import TextField from '@mui/material/TextField';
 
 const Search = ({ search }) => {
   const [query, setQuery] = useState('');
@@ -18,9 +21,22 @@ const Search = ({ search }) => {
   };
 
   return (
-    <div style={{ width: '65vw' }}>
-      <input onChange={handleChange} onKeyPress={handleKeyPress} style={{ width: '55vw' }} />
-      <button type="submit" onClick={handleClick} style={{ width: '9vw' }}>Search</button>
+    <div>
+      <TextField
+        id="search-bar"
+        className="text"
+        onChange={handleChange}
+        onKeyPress={handleKeyPress}
+        label="Search for animals"
+        color="success"
+        variant="outlined"
+        placeholder="Search..."
+        size="small"
+        sx={{ width: '50vw' }}
+      />
+      <IconButton type="submit" aria-label="search" onClick={handleClick}>
+        <SearchRoundedIcon style={{ fill: 'green' }} />
+      </IconButton>
     </div>
   );
 };
