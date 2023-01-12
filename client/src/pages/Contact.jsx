@@ -19,7 +19,7 @@ const Contact = () => {
   const sendQuestion = () => {
     const data = {
       service_id: process.env.SERVICE_ID,
-      template_id: process.env.TEMPLATE_ID,
+      template_id: process.env.CONTACT_TEMPLATE_ID,
       user_id: process.env.PUBLIC_KEY,
       template_params: {
         from_name: name,

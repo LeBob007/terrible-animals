@@ -33,10 +33,10 @@ const AddAnimal = ({ getAnimals }) => {
     <div>
       <Button onClick={handleOpen} color="success">Add a New Animal</Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle sx={{ color: '#1b5e20' }}>Add A Fun Fact!</DialogTitle>
+        <DialogTitle sx={{ color: '#1b5e20' }}>Add An Animal!</DialogTitle>
         <DialogContent>
           <DialogContentText sx={{ color: '#1b5e20' }}>
-            Have something to share? Add it down below!
+            Animal name here:
           </DialogContentText>
           <TextField
             autoFocus
