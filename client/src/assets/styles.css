@@ -28,13 +28,13 @@ body {
 }
 
 .fact-body-fact {
-  font-size: 20px;
+  font-size: 22px;
   overflow-wrap: break-word;
   grid-area: 1 / 1 / 3 / 5;
 }
 
 .fact-body-author {
-  font-size: 16px;
+  font-size: 20px;
   grid-area: 1 / 5 / 2 / 6;
   text-align: right;
 }

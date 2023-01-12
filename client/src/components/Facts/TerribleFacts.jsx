@@ -26,7 +26,7 @@ const TerribleFacts = ({
 
   return (
     <div className="center-container">
-      {facts.map((fact) => <Fact type="Terrible" key={fact._id} fact={fact} remove={remove} />)}
+      {facts.map((fact) => <Fact type="Terrible" key={fact._id} fact={fact} remove={remove} user={user} />)}
       <div className="add-fact-body">
         <Button variant="contained" onClick={handleOpen} color="success">Add a Fact</Button>
         <Dialog open={open} onClose={handleClose}>

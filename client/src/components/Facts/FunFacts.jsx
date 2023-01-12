@@ -9,15 +9,15 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Fact from './Fact';
 
 const FunFacts = ({
-  facts, add, remove,
+  facts, add, remove, user,
 }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [newFact, setNewFact] = useState({ type: 'Fun' });
+  const [newFact, setNewFact] = useState({ type: 'Fun', author: user });
   const handleFactChange = (e) => setNewFact({ ...newFact, fact: e.target.value });
-  const handleAuthorChange = (e) => setNewFact({ ...newFact, author: e.target.value });
+  // const handleAuthorChange = (e) => setNewFact({ ...newFact, author: e.target.value });
 
   const handleSubmit = () => {
     add(newFact);
@@ -26,7 +26,7 @@ const FunFacts = ({
 
   return (
     <div className="center-container">
-      {facts.map((fact) => <Fact type="Fun" key={fact._id} fact={fact} remove={remove} />)}
+      {facts.map((fact) => <Fact type="Fun" key={fact._id} fact={fact} remove={remove} user={user} />)}
       <div className="add-fact-body">
         <Button variant="contained" onClick={handleOpen} color="success">Add a Fact</Button>
         <Dialog open={open} onClose={handleClose}>
@@ -47,7 +47,7 @@ const FunFacts = ({
               variant="standard"
               required
             />
-            <TextField
+            {/* <TextField
               margin="dense"
               id="author"
               label="Author"
@@ -57,7 +57,7 @@ const FunFacts = ({
               fullWidth
               variant="standard"
               required
-            />
+            /> */}
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="success">Cancel</Button>
